@@ -2,9 +2,25 @@
 
 ブラウザで動作する NOBATASU Tools 由来の独立配布版です。Webアプリ本体にはDB・PHP処理は不要です。フォーム作成・回答保存には利用者のGoogleアカウントを使用します。
 
-## 起動
+## 利用方法
+
+### すぐ使う
+
+[公式サイトで三者懇談サポートを使う](https://nobatasu.com/app/tools/conference-form-generator/)
+
+公式サイトはブラウザだけで利用できます。通常利用ではDockerのインストールは不要です。
+
+### 自分のPCで動かす・改良する
+
+以下のローカル起動手順を使います。Dockerは任意で、Dockerなしでも起動できます。アプリによってはブラウザでHTMLファイルを直接開くと動作しないため、`localhost`のHTTPサーバー経由で開いてください。
+
+## ローカルで起動する
+
+### Dockerを使う
 
 Docker を使う場合は `docker compose up --build` を実行し、http://127.0.0.1:8091/ を開きます。ポートが使用中ならComposeの左側のポートを変更してください。
+
+### Dockerを使わない
 
 DockerなしではPython 3.10以上を用意して実行します。
 
