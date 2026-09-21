@@ -1,0 +1,245 @@
+[
+  {
+    "name": "qrious",
+    "version": "4.0.2",
+    "license": "GPL-3.0-or-later",
+    "files": [
+      {
+        "path": "vendor/qrious/COPYING",
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+        "url": "https://www.gnu.org/licenses/gpl-3.0.txt"
+      },
+      {
+        "path": "vendor/qrious/LICENSE.md",
+        "sha256": "573aa60568eb0d6829453b85a9bcae84763de76638bc16e6a198a9535871191a",
+        "url": "https://registry.npmjs.org/qrious/-/qrious-4.0.2.tgz#package/LICENSE.md"
+      },
+      {
+        "path": "vendor/qrious/SOURCE-PROVENANCE.json",
+        "sha256": "078ca2c53704d140e72a19b30dd8ad87096d4c7a86b82a49c0dd79c1a99b3f60",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/SOURCE-SHA256SUMS",
+        "sha256": "8cd2e0820232c488add6787d0dde7d6a97c8c57d8279968edfdaa1d403b52d0a",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/qrious.min.js",
+        "sha256": "db99dcaf40a926181bce4522477c2efc5924f6c4b29111b6a97faea477c9528b",
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"
+      },
+      {
+        "path": "vendor/qrious/source/README-build.md",
+        "sha256": "6169abf5b23104aa347943a1303c5adbcb9b495e29029ccfc73f7ce15dbd678e",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/CHANGES.md",
+        "sha256": "805a6041ef05c82f8b27104e047cff7eea6061bb404f96990bed48e0081f4612",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/LICENSE.md",
+        "sha256": "573aa60568eb0d6829453b85a9bcae84763de76638bc16e6a198a9535871191a",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/README.md",
+        "sha256": "de8967641b2d8b06f68e71d0510e5585e00a945212a8f3fa9f4441df9b2881b3",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/index.js",
+        "sha256": "3200d16056c12e67f668152cbcbf82bd3745570c8bdf3bf82f71cc82f52a8f23",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/package.json",
+        "sha256": "8c57e3aceda4ab8f8289353716d8c6e2bc9ce5e3e2662fd21f92014841bfaa3d",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/Alignment.js",
+        "sha256": "1b23d126b6d839b71f659d8d6f7a49900b03705deb3f09e0805a7697be672eb2",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/ErrorCorrection.js",
+        "sha256": "fba178c1df55e2c571b61e75902a6b8d946ac5adf4009632004fa947ea915282",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/Frame.js",
+        "sha256": "b467be428aabe3bdcdc3ed876fc4bba34a8ec997a2d7c05fb5352d3c0d3e33fe",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/Galois.js",
+        "sha256": "df241e3678f03277e52a364ba999edbaa028d0f1596dc9e2386400bed6481254",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/QRious.js",
+        "sha256": "0a8eb32b5c01d47a6b0c03cbc1f2efb20ecaedd0c6e36dac261c103a05a9fbc9",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/Version.js",
+        "sha256": "ad380755f440e565fe84495127f36af2fbf6d43bface38dfe6460526b233c661",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/option/Option.js",
+        "sha256": "806f65d07ce725b98a530e1effc25eba355822471f97c320530e67def460de56",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/option/OptionManager.js",
+        "sha256": "adb56c0640dd0eac75654a0c57d0d309b433ed7fe598a88152a0de92f0b6a090",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/renderer/CanvasRenderer.js",
+        "sha256": "9b3ad5868f2f517455f3642f48cdafc3afafa0262ec665bc3624249c75143fa3",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/renderer/ImageRenderer.js",
+        "sha256": "602e9eb1d5d94ee83920840cd64d68eff034b0e14d6dcc89a88d685368e76a97",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/renderer/Renderer.js",
+        "sha256": "46a1a4ef95c9270c32b245c84f5698b1c93840ef50a15af0fa7b7c6274dfc8b8",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/service/Service.js",
+        "sha256": "3850e55f6e250e7e4ac6610a059d45ff6c1e60ca54e543af09f49d0933ff642b",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/service/ServiceManager.js",
+        "sha256": "7e6705cfda4b05515bf57a9ca770bd0ebd4b20a7e587478a21eb941edc4af5e5",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/service/element/ElementService.js",
+        "sha256": "40d0943bdf7727e52508aa14c1d4a977fccc590e1b0f9b661ed3d0081336edd2",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious-core/src/util/Utilities.js",
+        "sha256": "d7eb123aeeb0cddd45e7227f8f9877ff11d9d0b95ba603989313acd6fe7be7b8",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/.eslintignore",
+        "sha256": "4562251cbbae7291c62fb26d1cdcf780ce00ab6f1bcda46703b227a6493e8a27",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/.eslintrc.json",
+        "sha256": "a57bf20731edd312e02bab62f7933ebca6422f6cc800743fd1bd743a8467abef",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/AUTHORS.md",
+        "sha256": "7a47b76060c5f745b1b096c0854a01f8e7ddb3f8e42f55d794c3540d72b3f218",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/CHANGES.md",
+        "sha256": "3cd1c9c78cce97d3e732c6a51ad246983bc5cd7c45652737abcc83d2ec1fa5a3",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/Gruntfile.js",
+        "sha256": "33c6e42ba0d4df1e79af4b91a7480c06d5d6d3bcf3c3a5c88c913093aac181ce",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/LICENSE.md",
+        "sha256": "573aa60568eb0d6829453b85a9bcae84763de76638bc16e6a198a9535871191a",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/README.md",
+        "sha256": "e821fa2e2b5f44b1bfaec3cc77aa5be0f7ead270d3ba72b42ce7c28fa30aaafd",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/package-lock.json",
+        "sha256": "12314543ca79c250e9c4d266852ff0f63092636a8a635e3325e0c82703a90e5d",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/package.json",
+        "sha256": "cb5c535446f79a9b9e234736a2c588e38041973069cdacf81bafce6a22806267",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/src/QRious.js",
+        "sha256": "5a7244b6d8e6df07556c588310085e39adf73299f2209b406a321c707152cc5c",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      },
+      {
+        "path": "vendor/qrious/source/qrious/src/service/element/BrowserElementService.js",
+        "sha256": "141699c39968c9127fb388bf7e25ade8505f72ebb958f7f1ed264f54c87ea597",
+        "provenance": "vendor/qrious/SOURCE-PROVENANCE.json"
+      }
+    ]
+  },
+  {
+    "name": "html2canvas",
+    "version": "1.4.1",
+    "license": "MIT",
+    "files": [
+      {
+        "path": "vendor/html2canvas/html2canvas.min.js",
+        "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+        "sha256": "e87e550794322e574a1fda0c1549a3c70dae5a93d9113417a429016838eab8cb"
+      },
+      {
+        "path": "vendor/html2canvas/LICENSE",
+        "url": "https://raw.githubusercontent.com/niklasvh/html2canvas/v1.4.1/LICENSE",
+        "sha256": "86200ce4e92d9a22c41c8647a55f7a5fddff304ff89b4d36ecc699ed8c123d2c"
+      }
+    ]
+  },
+  {
+    "name": "jspdf",
+    "version": "2.5.1",
+    "license": "MIT",
+    "files": [
+      {
+        "path": "vendor/jspdf/jspdf.umd.min.js",
+        "url": "https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js",
+        "sha256": "98ccf17aa10c20bb1301762618fcc9b6ab3a4e7f26b6071d64d0b41154df3875"
+      },
+      {
+        "path": "vendor/jspdf/LICENSE",
+        "url": "https://raw.githubusercontent.com/parallax/jsPDF/v2.5.1/LICENSE",
+        "sha256": "2d26bfab8a36d2250602c7a7597237e180c5cd3517acc108126e3cb399f483c8"
+      }
+    ]
+  },
+  {
+    "name": "exceljs",
+    "version": "4.4.0",
+    "license": "MIT",
+    "files": [
+      {
+        "path": "vendor/exceljs/exceljs.min.js",
+        "url": "https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js",
+        "sha256": "7e49da68588e250dbb8bba190d2caa8ab3787cc0284bda1d8b2f805c4df742c9"
+      },
+      {
+        "path": "vendor/exceljs/LICENSE",
+        "url": "https://raw.githubusercontent.com/exceljs/exceljs/v4.4.0/LICENSE",
+        "sha256": "2ed526b7e7c7681dc2347995b5036ddf73dc27d0539cdea59b6d4a72b63a57a0"
+      }
+    ]
+  }
+]

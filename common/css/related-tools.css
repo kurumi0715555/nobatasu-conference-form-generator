@@ -1,0 +1,70 @@
+.related-tools-section {
+    margin: var(--spacing-xxl) 0 var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    background: linear-gradient(135deg, var(--surface-color), var(--surface-soft));
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+}
+.related-tools-heading {
+    margin: 0 0 var(--spacing-lg);
+    font-size: var(--fs-h3);
+    color: var(--text-color);
+    text-align: center;
+}
+.related-tools-heading i {
+    color: var(--primary-color);
+    margin-right: var(--spacing-sm);
+}
+.related-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+}
+@media (max-width: 899px) {
+    .related-tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 599px) {
+    .related-tools-grid { grid-template-columns: 1fr; }
+}
+.related-tool-card {
+    display: block;
+    padding: var(--spacing-lg) var(--spacing-md);
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.related-tool-card:hover,
+.related-tool-card:focus-visible {
+    transform: translateY(var(--hover-lift-card));
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+.related-tool-card:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring), var(--shadow-medium);
+}
+.related-tool-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+.related-tool-title {
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-body);
+    color: var(--text-color);
+    margin-bottom: var(--spacing-xs);
+}
+.related-tool-desc {
+    font-size: var(--fs-caption);
+    color: var(--gray-darker);
+    line-height: 1.4;
+}
+@media (prefers-reduced-motion: reduce) {
+    .related-tool-card { transition: none; }
+    .related-tool-card:hover,
+    .related-tool-card:focus-visible { transform: none; }
+}

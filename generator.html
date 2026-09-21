@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="三者懇談の希望調査フォーム作成、保護者案内、回答読込、日程決定、配布物印刷までをブラウザで支援します。">
+    <link rel="stylesheet" href="common/css/common.css">
+    
+    <link rel="stylesheet" href="common/css/landscape-guard.css">
+    <link rel="stylesheet" href="css/conference-form-generator.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/solid.css">
+<title>三者懇談サポート</title>
+<link rel="stylesheet" href="oss/standalone.css">
+<script defer src="oss/standalone.js"></script>
+</head>
+<body class="tool-page">
+    <div class="site-wrapper">
+        <aside class="ad-left"><!-- Ads injected by common-ads.js --></aside>
+
+        <div class="container">
+            <header>
+                <h1><i class="fas fa-calendar-check"></i> 三者懇談サポート</h1>
+                <p class="subtitle">フォーム作成から日程決定、配布物の印刷まで一貫して支援します</p>
+            </header>
+
+            <main>
+                <nav class="service-flow no-print" aria-label="三者懇談サポートの流れ">
+                    <a class="service-flow-item is-current" href="generator.html">
+                        <span>1</span>
+                        <strong>フォームを作る</strong>
+                        <small>GAS生成</small>
+                    </a>
+                    <a class="service-flow-item" href="howto.html">
+                        <span>2</span>
+                        <strong>GASを実行</strong>
+                        <small>実行手順</small>
+                    </a>
+                    <a class="service-flow-item" href="invitation.html">
+                        <span>3</span>
+                        <strong>案内を印刷</strong>
+                        <small>QRコード付き</small>
+                    </a>
+                    <a class="service-flow-item" href="scheduler.html">
+                        <span>4</span>
+                        <strong>日程を決める</strong>
+                        <small>読込・割当・印刷</small>
+                    </a>
+                </nav>
+                <div class="role-note-banner no-print">
+                    <i class="fas fa-circle-info"></i>
+                    <p><strong>教務主任・担当者向け（最初に1回だけ）。</strong>各担任の方は<a href="scheduler.html" class="role-note-link">日程を決める・印刷する</a>へ。</p>
+                </div>
+
+                <div class="page-utility-row no-print">
+                    <a class="service-home-link no-print" href="index.html"><i class="fas fa-arrow-left"></i> サービスTOPへ戻る</a>
+                    <a class="system-guide-link no-print" href="data-flow.html"><i class="fas fa-diagram-project"></i><strong>仕組みとデータの流れ</strong></a>
+                </div>
+
+                <details class="privacy-note no-print">
+                    <summary><i class="fas fa-shield-halved"></i> 保存先とデータについて（入力内容はNOBATASUへ送信・保存されません）</summary>
+                    <ul class="storage-summary">
+                        <li>この画面の入力内容は、NOBATASUへ送信・保存されません。</li>
+                        <li>全校名簿はブラウザ内で読み取り、生成するGASに含めます。このサイトやブラウザ内には保存しません。</li>
+                        <li>学校名・校長名・回答期限・実施日だけを、案内印刷ページへ引き継ぐため同じタブ内に一時保存します。タブを閉じると消去されます。</li>
+                        <li>作成したApps Scriptプロジェクトは、使用するGoogleアカウントのGoogle Driveへ保存されます。</li>
+                        <li>GASを実行すると、Googleフォームと回答スプレッドシートはApps Scriptと同じGoogle Driveフォルダへ作成されます。</li>
+                    </ul>
+                </details>
+
+                <div class="tool-layout">
+                    <aside class="step-rail no-print" aria-label="入力の流れ">
+                        <p class="step-rail-title">設定の流れ</p>
+                        <a href="#initialHeading"><b><i class="fas fa-school"></i></b>学校情報・名簿</a>
+                        <a href="#basicHeading"><b>1</b>フォーム設定</a>
+                        <a href="#documentHeading"><b>2</b>文書設定</a>
+                        <a href="#scheduleHeading"><b>3</b>懇談日時</a>
+                        <a href="#generateArea" class="is-action"><b><i class="fas fa-wand-magic-sparkles"></i></b>GASを生成</a>
+                    </aside>
+                    <div class="tool-main">
+
+                <section class="input-area no-print initial-setup" aria-labelledby="initialHeading">
+                    <h2 class="section-title" id="initialHeading"><span class="initial-label">初期設定</span> 学校情報と全校名簿を設定する</h2>
+                    <p class="section-description">ここで一度設定すると、対象学級、案内文書、回答照合、日程決定に引き継がれます。</p>
+
+                    <!-- 2回目以降の先生だけが使う機能。初回の人の通り道をふさがないよう、
+                         既定は畳んでおき、必要な人だけ開く -->
+                    <details class="settings-file-actions no-print">
+                        <summary><i class="fas fa-rotate-left"></i> 昨年の設定を読み込む・保存する</summary>
+                        <div class="settings-file-body">
+                            <p class="field-hint">学校・フォーム・文書の設定をJSONで保存できます。名簿と懇談日の日付は含まれません。</p>
+                            <div class="settings-file-buttons">
+                                <button type="button" class="btn btn-secondary btn-small" id="saveSettingsBtn">
+                                    <i class="fas fa-download"></i> 設定をJSONで保存
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-small" id="loadSettingsBtn">
+                                    <i class="fas fa-upload"></i> 設定をJSONから読み込む
+                                </button>
+                            </div>
+                            <p class="settings-file-status" id="settingsFileStatus" aria-live="polite"></p>
+                        </div>
+                    </details>
+
+                    <div class="school-settings-step">
+                        <h3><span class="setup-step-label">STEP 1</span> 学校名と校長名を入力する</h3>
+                        <p>案内文書や決定通知に共通して使用します。GASを生成するまでは後から修正できます。</p>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="schoolName">学校名 <span class="required">必須</span></label>
+                                <input type="text" id="schoolName" placeholder="例：〇〇市立〇〇中学校" required aria-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="principalName">校長名 <span class="required">必須</span></label>
+                                <input type="text" id="principalName" placeholder="例：〇〇 〇〇" required aria-required="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="school-settings-step">
+                        <h3><span class="setup-step-label">STEP 2</span> 学級構成を入力する</h3>
+                        <p>名簿テンプレートの列（学級）と行（出席番号）を決めます。年度で学級数が変わったら、ここを直してテンプレートを取り直してください。</p>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="classCount1">1年の学級数</label>
+                                <input type="number" id="classCount1" min="0" max="20" step="1" value="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="classCount2">2年の学級数</label>
+                                <input type="number" id="classCount2" min="0" max="20" step="1" value="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="classCount3">3年の学級数</label>
+                                <input type="number" id="classCount3" min="0" max="20" step="1" value="3">
+                            </div>
+                            <div class="form-group">
+                                <label for="maxAttendanceNumber">1学級の最大出席番号</label>
+                                <input type="number" id="maxAttendanceNumber" min="1" max="99" step="1" value="40">
+                            </div>
+                            <div class="form-group form-group-wide">
+                                <label for="supportClasses">特別支援学級など（1行に1学級）</label>
+                                <textarea id="supportClasses" rows="3" placeholder="例：ひまわり組"></textarea>
+                                <p class="field-hint">「1年1組」の形でない学級はここに書きます。学年をまたぐ学級もそのまま1列になります。交流学級にも在籍する生徒は、両方の列に入力してかまいません。どちらの学級で懇談するかは、日程決定ページの「対象」チェックで選びます。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ol class="setup-flow roster-setup-flow" aria-label="名簿設定の手順">
+                        <li class="setup-action-card">
+                            <strong>全校名簿テンプレートをダウンロード</strong>
+                            <span>学級構成に合わせた見出し付きExcelを用意します</span>
+                            <button type="button" class="btn btn-secondary roster-step-action" id="downloadInitialRosterBtn">
+                                <i class="fas fa-download"></i> テンプレートをダウンロード
+                            </button>
+                        </li>
+                        <li>
+                            <strong>テンプレートへ名簿を入力</strong>
+                            <span>学級の列に、出席番号の行へ氏名を入力します</span>
+                        </li>
+                        <li class="setup-action-card">
+                            <strong>入力済み名簿を読み込む</strong>
+                            <span>学級一覧を自動取得します</span>
+                            <label class="file-button roster-step-action" for="initialRosterFile" role="button" tabindex="0" aria-controls="initialRosterFile">
+                                <i class="fas fa-upload"></i> 入力済み名簿を選択
+                            </label>
+                            <input type="file" id="initialRosterFile" accept=".xlsx" hidden>
+                        </li>
+                    </ol>
+
+                    <p class="field-hint roster-template-hint">1行目の学級名とA列の出席番号は変更せず、氏名だけを入力してください。欠番の行は空欄のままで構いません。</p>
+                    <div class="alert alert-info roster-file-status" id="initialRosterStatus" aria-live="polite" hidden></div>
+                </section>
+
+                <section class="input-area no-print" aria-labelledby="basicHeading">
+                    <h2 class="section-title" id="basicHeading"><span class="step-number">1</span> フォームの基本設定</h2>
+
+                    <div class="form-grid">
+                        <div class="form-group form-group-wide">
+                            <label for="formTitle">フォームのタイトル <span class="required">必須</span></label>
+                            <input type="text" id="formTitle" value="三者懇談 日程希望調査" maxlength="80" required aria-required="true">
+                        </div>
+
+                        <div class="form-group form-group-wide">
+                            <label for="formDescription">保護者への説明 <span class="required">必須</span></label>
+                            <textarea id="formDescription" rows="13" maxlength="1000" required aria-required="true">三者懇談の希望調査フォームです。回答は5分ほどで終わります。
+
+はじめに、お子さまの学級・出席番号・氏名を入力してください。
+きょうだいが本校に在籍している場合は、続けて同じフォームでまとめて回答できます。
+
+日時の質問では、「参加できない時間」だけにチェックを入れてください。
+チェックのなかった時間の中から、学校で日程を組みます。
+
+決定した日時は、後日プリントでお知らせします。</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="classes">対象学級 <span class="required">必須</span></label>
+                            <textarea id="classes" rows="5" placeholder="全校名簿をアップロードすると自動表示されます" readonly></textarea>
+                            <p class="field-hint">名簿の学年・クラスから自動取得し、Googleフォームの選択肢にします。</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="responseDeadline">回答期限</label>
+                            <input type="date" id="responseDeadline">
+                            <p class="field-hint">説明文の末尾に期限を表示します。未入力でも生成できます。</p>
+                        </div>
+
+                        <div class="form-group form-group-wide">
+                            <label for="responseMode">回答方式 <span class="required">必須</span></label>
+                            <select id="responseMode">
+                                <option value="checked_unavailable" selected>参加できない日時を選ぶ</option>
+                                <option value="checked_available">参加できる日時を選ぶ</option>
+                            </select>
+                            <p class="field-hint" id="responseModeHint">保護者は参加できない日時だけにチェックします。未チェックの日時は参加可能として扱います。</p>
+                        </div>
+
+                        <div class="form-group form-group-wide remark-settings">
+                            <label class="checkbox-line" for="remarkEnabled">
+                                <input type="checkbox" id="remarkEnabled" checked>
+                                <span>保護者フォームに備考欄を作る</span>
+                            </label>
+                            <div class="remark-fields" id="remarkFields">
+                                <div>
+                                    <label for="remarkTitle">備考欄の見出し</label>
+                                    <input type="text" id="remarkTitle" value="備考">
+                                </div>
+                                <div>
+                                    <label for="remarkHelpText">備考欄の説明文</label>
+                                    <input type="text" id="remarkHelpText" value="懇談に関わって伝えたいことがあれば入力してください。" placeholder="懇談に関わって伝えたいことがあれば入力してください。">
+                                    <p class="field-hint">Googleフォームでは、入力欄の中ではなく説明文として表示されます。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="input-area no-print" aria-labelledby="documentHeading">
+                    <h2 class="section-title" id="documentHeading"><span class="step-number">2</span> 共通文書設定</h2>
+                    <p class="section-description">日程決定後に各担任が印刷する通知文の共通文言です。ここに入れた内容は回答スプレッドシートへ保存され、日程決定ページで自動入力されます。</p>
+
+                    <div class="form-grid">
+                        <div class="form-group form-group-wide">
+                            <label for="noticeTitle">案内文書のタイトル</label>
+                            <input type="text" id="noticeTitle" value="三者懇談 日時のお知らせ" maxlength="60">
+                            <p class="field-hint">日程決定後に印刷する保護者通知の見出しになります。</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="noticeDeliveryDate">配布予定日</label>
+                            <input type="date" id="noticeDeliveryDate">
+                            <p class="field-hint">この日付から時候の挨拶を選び、決定通知の本文に入れます。日程決定ページの文書日付にも引き継ぎます。</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="noticePlace">懇談場所</label>
+                            <input type="text" id="noticePlace" value="各教室" placeholder="例：各教室、会議室、体育館など">
+                        </div>
+                        <div class="form-group form-group-wide">
+                            <label for="noticeMessage">決定通知の本文</label>
+                            <textarea id="noticeMessage" rows="9">三者懇談の日時が下記のとおり決まりましたので、お知らせいたします。お子さまの学校での様子をお伝えするとともに、ご家庭での様子もお聞かせいただければ幸いです。ご多用のところ恐れ入りますが、ご来校くださいますようお願いいたします。</textarea>
+                            <p class="field-hint">配布予定日を変えると時候の挨拶を入れ直します。ここを直接書き換えた場合は、以後の自動更新を止めます。</p>
+                        </div>
+                        <div class="form-group form-group-wide">
+                            <label for="noticeNote">お願い・連絡事項</label>
+                            <textarea id="noticeNote" rows="8">・当日は受付はありません。時間になりましたら、教室へ直接お越しください。
+・前のご家庭の状況により、開始時刻が多少前後することがあります。
+・ご都合が悪くなった場合は、お手数ですが担任までご連絡ください。
+・上履きをご持参ください。</textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="input-area no-print" aria-labelledby="scheduleHeading">
+                    <div class="section-heading-row">
+                        <div>
+                            <h2 class="section-title" id="scheduleHeading"><span class="step-number">3</span> 懇談日時</h2>
+                            <p class="section-description">日ごとに受付時間を設定します。休憩がなければ除外時間は空欄で構いません。</p>
+                        </div>
+                    </div>
+
+                    <div class="duration-setting">
+                        <label for="slotDuration">1家庭あたり</label>
+                        <select id="slotDuration" class="select-input">
+                            <option value="10">10分</option>
+                            <option value="15" selected>15分</option>
+                            <option value="20">20分</option>
+                            <option value="30">30分</option>
+                        </select>
+                    </div>
+
+                    <div class="schedule-list" id="scheduleList"></div>
+
+                    <!-- 追加ボタンは日程カードの下に置く。既存の日程を見てから足す操作なので、
+                         見出し横にあると「何に対して追加するのか」が視線の順序と合わない -->
+                    <div class="schedule-add-row">
+                        <button type="button" class="btn btn-secondary" id="addScheduleBtn">
+                            <i class="fas fa-plus"></i> 日程を追加
+                        </button>
+                    </div>
+                </section>
+
+                <aside class="preflight-help no-print" aria-labelledby="preflightHelpTitle">
+                    <div class="preflight-help-icon"><i class="fas fa-circle-question"></i></div>
+                    <div class="preflight-help-copy">
+                        <h2 id="preflightHelpTitle">GASを初めて使う方へ</h2>
+                        <p>生成したコードの貼り付け方、実行方法、Googleの権限確認まで、画面見本つきで説明します。</p>
+                    </div>
+                    <a class="btn btn-secondary" href="howto.html" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-images"></i> 作成後の手順を先に見る
+                    </a>
+                </aside>
+
+                <div class="action-bar no-print" id="generateArea">
+                    <button type="button" class="btn btn-primary btn-large" id="generateBtn">
+                        <i class="fas fa-wand-magic-sparkles"></i> GASを生成
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="resetBtn">
+                        <i class="fas fa-rotate-left"></i> 入力をリセット
+                    </button>
+                </div>
+                <div class="reset-confirm-banner no-print" id="resetConfirmBanner" hidden>
+                    <div class="reset-confirm-inner">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        <span>入力内容をすべてリセットします。元に戻せません。</span>
+                        <div class="reset-confirm-actions">
+                            <button type="button" class="btn btn-danger btn-small" id="resetConfirmBtn">リセットする</button>
+                            <button type="button" class="btn btn-secondary btn-small" id="resetCancelBtn">キャンセル</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-error no-print" id="errorMessage" role="alert" tabindex="-1" hidden></div>
+
+                <section class="result-area" id="resultArea" aria-labelledby="resultHeading" hidden>
+                    <div class="result-heading-row">
+                        <div>
+                            <h2 class="section-title" id="resultHeading"><span class="step-number">4</span> 生成したGAS</h2>
+                            <p id="resultSummary" class="result-summary"></p>
+                        </div>
+                        <div class="result-actions no-print">
+                            <button type="button" class="btn btn-success" id="copyBtn">
+                                <i class="fas fa-copy"></i> GASをコピー
+                            </button>
+                        </div>
+                    </div>
+                    <div class="copy-status" id="copyStatus" aria-live="polite"></div>
+                    <div class="code-output-shell">
+                        <div class="code-output-header">Google Apps Script</div>
+                        <pre class="code-output"><code id="gasOutput"></code></pre>
+                    </div>
+
+                    <div class="next-steps no-print">
+                        <h3><i class="fas fa-arrow-up-right-from-square"></i> Googleフォームを作成する手順</h3>
+                        <a class="btn btn-info howto-button" href="howto.html" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-images"></i> 画像つきの詳しい手順を見る
+                        </a>
+                        <ol>
+                            <li><strong>事前確認：</strong>学校のGoogleアカウントでログインしているか、画面右上のアカウントアイコンで確認します。個人アカウントが混在していると、別のアカウントにフォームが作成されることがあります。</li>
+                            <li><a href="https://script.google.com/home" target="_blank" rel="noopener noreferrer">Google Apps Script</a>を開き、「新しいプロジェクト」を作ります。</li>
+                            <li>最初からあるコードを消し、上のGASを貼り付けます。保存は <kbd>Cmd+S</kbd>（Windowsは <kbd>Ctrl+S</kbd>）です。</li>
+                            <li><code>createConferencePreferenceForm</code> を実行し、Googleアカウントの権限を許可します。</li>
+                            <li>実行ログに表示されたURLから、フォームと回答スプレッドシートを確認します。回答スプレッドシートでは<code>希望一覧</code>・<code>入力不備・要確認履歴</code>・<code>名簿（原本）</code>の3枚を主に使います。自動処理用のシートも作成されますが、普段は非表示です。シート名や列構成は変更しないでください。</li>
+                            <li>保護者へ案内する前に、1人の回答と、必要ならきょうだいを含む回答をテスト送信し、各自動作成シートにエラーがないことを確認します。</li>
+                            <li>テスト後は、Googleフォームの「回答」からテスト回答を削除します。次に回答スプレッドシートで「表示」→「非表示のシート」→「元データ」を開き、該当するテスト行だけを行ごと削除します。列や見出しは変更しません。</li>
+                            <li>テスト確認が終わったら、この Apps Script プロジェクトは削除してかまいません。コードに名簿が含まれるため、残さないほうが安全です（作成したフォームと回答スプレッドシートは削除されません）。</li>
+                        </ol>
+                        <table class="url-use-table">
+                            <thead><tr><th>URL</th><th>使い方</th></tr></thead>
+                            <tbody>
+                                <tr><th>保護者回答用フォーム</th><td>「案内を印刷」ページで使用します。</td></tr>
+                                <tr><th>回答スプレッドシート</th><td>回答締切後に<code>入力不備・要確認履歴</code>を確認してから、「ファイル」→「ダウンロード」→「Microsoft Excel（.xlsx）」で保存し、「日程を決める」ページで使用します。</td></tr>
+                                <tr><th>編集用フォーム</th><td>説明文の修正や回答受付の終了に使用します。質問の見出し・並び・回答先を変える場合は、このツールで作り直してください。</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="oauth-warning-note"><i class="fas fa-triangle-exclamation"></i> 初回は「このアプリはGoogleで確認されていません」と表示される場合があります。エラーではありません。自分で作成したプロジェクト名とコードを確認し、「詳細」から進みます。詳しい押し方は上の実行手順で確認できます。</p>
+                    </div>
+                </section>
+
+                <div class="instructions">
+                    <h3><i class="fas fa-info-circle"></i> 使い方</h3>
+                    <ol>
+                        <li><strong>初期設定</strong>：学校情報と学級構成を入力し、全校名簿を読み込みます。設定はJSONで保存して来年度も使い回せます。</li>
+                        <li><strong>基本設定</strong>：フォーム名、説明、回答方式を入力します。対象学級は名簿から自動表示されます。</li>
+                        <li><strong>共通文書設定</strong>：案内文書のタイトル・配布予定日・通知文を入力します。配布予定日から時候の挨拶が自動で入ります。</li>
+                        <li><strong>懇談日時</strong>：各日の開始・終了時刻と、必要なら休憩などの除外時間を設定します。</li>
+                        <li><strong>GASを生成</strong>：コードをコピーしてGoogle Apps Scriptで実行します。名簿照合と希望の集計が自動で動く回答スプレッドシートが作成されます。</li>
+                    </ol>
+                    <p class="note"><i class="fas fa-lightbulb"></i>
+                        <strong>回答方法</strong>：「参加できない日時を選ぶ」「参加できる日時を選ぶ」を学校の運用に合わせて切り替えられます。
+                    </p>
+                </div>
+                    </div>
+                </div>
+            </main>
+
+            <div class="ad-horizontal no-print">
+                <div class="ad-label">広告</div>
+                <div class="ad-horizontal-content">
+                    <i class="fas fa-rectangle-ad"></i>
+                    <p>728×90 レクタングル（大）バナー広告</p>
+                </div>
+            </div>
+
+            <footer><!-- Footer will be injected by common-footer.js --></footer>
+        </div>
+
+        <aside class="ad-right"><!-- Ads injected by common-ads.js --></aside>
+    </div>
+
+    <template id="scheduleRowTemplate">
+        <article class="schedule-card">
+            <div class="schedule-card-header">
+                <h3><i class="fas fa-calendar-day"></i> <span class="schedule-label">日程</span></h3>
+                <button type="button" class="icon-button remove-schedule" aria-label="この日程を削除" title="この日程を削除">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <div class="schedule-fields">
+                <div class="form-group">
+                    <label class="schedule-date-label">日付 <span class="required">必須</span></label>
+                    <input type="date" class="schedule-date">
+                </div>
+                <div class="form-group">
+                    <label class="schedule-start-label">開始 <span class="required">必須</span></label>
+                    <input type="time" step="300" class="schedule-start">
+                </div>
+                <div class="form-group">
+                    <label class="schedule-end-label">終了 <span class="required">必須</span></label>
+                    <input type="time" step="300" class="schedule-end">
+                </div>
+                <div class="form-group break-field">
+                    <label class="break-label">除外時間（任意）</label>
+                    <div class="time-range">
+                        <input type="time" step="300" class="break-start" aria-label="除外時間の開始">
+                        <span>〜</span>
+                        <input type="time" step="300" class="break-end" aria-label="除外時間の終了">
+                    </div>
+                    <p class="field-hint">休憩・会議など外したいコマがある場合に設定します。</p>
+                </div>
+            </div>
+            <p class="slot-preview"><i class="fas fa-clock"></i> 日付と時間を入力すると、作成される時間枠を表示します。</p>
+        </article>
+    </template>
+
+    <script src="vendor/exceljs/exceljs.min.js"></script>
+    <!-- 飛び先は紹介記事。実行手順は howto.html 側にあるため
+         「詳しい使い方」とは名乗らせない -->
+    <script src="js/conference-doc-format.js"></script>
+    <script src="js/conference-form-generator.js"></script>
+    
+</body>
+</html>

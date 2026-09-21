@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="三者懇談の回答スプレッドシートをExcel形式で読み込み、名簿照合、日程決定、通知文書と一覧表の印刷まで行えます。">
+    <link rel="stylesheet" href="common/css/common.css">
+    
+    <link rel="stylesheet" href="common/css/landscape-guard.css">
+    <link rel="stylesheet" href="css/conference-form-generator.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/solid.css">
+<title>三者懇談サポート</title>
+<link rel="stylesheet" href="oss/standalone.css">
+<script defer src="oss/standalone.js"></script>
+</head>
+<body class="tool-page">
+    <div class="site-wrapper">
+        <aside class="ad-left"><!-- Ads injected by common-ads.js --></aside>
+
+        <div class="container">
+            <header>
+                <h1><i class="fas fa-calendar-days"></i> 日程を決める・印刷する</h1>
+                <p class="subtitle">回答xlsxと名簿から、クラスごとの三者懇談日程を作成します</p>
+            </header>
+
+            <main>
+                <nav class="service-flow no-print" aria-label="三者懇談サポートの流れ">
+                    <a class="service-flow-item" href="generator.html"><span>1</span><strong>フォームを作る</strong><small>GAS生成</small></a>
+                    <a class="service-flow-item" href="howto.html"><span>2</span><strong>GASを実行</strong><small>実行手順</small></a>
+                    <a class="service-flow-item" href="invitation.html"><span>3</span><strong>案内を印刷</strong><small>QRコード付き</small></a>
+                    <a class="service-flow-item is-current" href="scheduler.html"><span>4</span><strong>日程を決める</strong><small>読込・割当・印刷</small></a>
+                </nav>
+                <a class="service-home-link no-print" href="index.html"><i class="fas fa-arrow-left"></i> サービスTOPへ戻る</a>
+                <a class="system-guide-link no-print" href="data-flow.html"><i class="fas fa-diagram-project"></i><div><strong>仕組みとデータの流れ</strong><span>入力情報の処理場所・保存先を確認する</span></div><i class="fas fa-chevron-right"></i></a>
+
+                <details class="privacy-note no-print">
+                    <summary><i class="fas fa-shield-halved"></i> データはブラウザ内で処理します（読み込んだExcelや名簿は送信・保存されません）</summary>
+                    <ul class="storage-summary">
+                        <li>読み込んだExcelや名簿は、NOBATASUへ送信・保存されません。</li>
+                        <li>回答スプレッドシートは「ファイル → ダウンロード → Microsoft Excel（.xlsx）」で保存したものを使います。</li>
+                        <li>回答シート、<code>日程条件</code>、<code>名簿（原本）</code>、<code>学校設定</code>を1つのxlsxから読み取ります。</li>
+                    </ul>
+                </details>
+
+                <div class="tool-layout tool-layout--wide">
+                    <aside class="step-rail no-print" aria-label="作業の流れ">
+                        <p class="step-rail-title">作業の流れ</p>
+                        <a href="#loadTitle"><b>1</b>読み込む</a>
+                        <a href="#identityReviewTitle"><b>2</b>照合する</a>
+                        <a href="#assignTitle"><b>3</b>固定・割当</a>
+                        <a href="#scheduleResultTitle"><b>4</b>微調整</a>
+                        <a href="#printSettingsTitle" class="is-action"><b><i class="fas fa-file-pdf"></i></b>印刷する</a>
+                    </aside>
+                    <div class="tool-main">
+
+                <section class="input-area no-print" aria-labelledby="loadTitle" data-tutorial-step="load">
+                    <h2 class="section-title" id="loadTitle"><span class="step-number">1</span> 回答と名簿を読み込む</h2>
+                    <div class="scheduler-load-flow">
+                        <div class="form-group answer-file-field">
+                            <label for="answerFile">回答スプレッドシート（.xlsx） <span class="required">必須</span></label>
+                            <ol class="download-steps">
+                                <li>Googleドライブで<b>回答スプレッドシート</b>を開く</li>
+                                <li>上のメニューから<br class="download-steps-break"><code>ファイル</code> <span class="download-steps-arrow" aria-hidden="true">▸</span> <code>ダウンロード</code> <span class="download-steps-arrow" aria-hidden="true">▸</span> <code>Microsoft Excel (.xlsx)</code> を選ぶ</li>
+                                <li>保存された <code>.xlsx</code> を、下のボタンから選ぶ</li>
+                            </ol>
+                            <div class="file-input-row">
+                                <label class="file-button" for="answerFile" role="button" tabindex="0" aria-controls="answerFile">
+                                    <i class="fas fa-upload"></i>
+                                    回答スプレッドシートを選ぶ
+                                </label>
+                                <span class="file-name" id="answerFileName" aria-live="polite">ファイルが選択されていません</span>
+                            </div>
+                            <input type="file" id="answerFile" accept=".xlsx" hidden>
+                            <p class="field-hint">選ぶとすぐに読み込みます。名簿・学校情報・懇談日時も、このファイルから自動で読み取ります。</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetClass">今回組むクラス</label>
+                            <select id="targetClass" disabled>
+                                <option value="">先にデータを読み込んでください</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="alert alert-error" id="schedulerError" role="alert" hidden></div>
+                    <div class="scheduler-summary" id="loadSummary" aria-live="polite" hidden></div>
+                </section>
+
+                <section class="input-area no-print" id="identityReview" aria-labelledby="identityReviewTitle" data-tutorial-step="check" hidden>
+                    <h2 class="section-title" id="identityReviewTitle"><span class="step-number">2</span> 名簿と回答を照合する</h2>
+                    <p class="section-description">学校の名簿と、保護者が入力した出席番号・氏名を並べて確認します。氏名が名簿と完全一致し、同じクラスに1人だけいる場合は、出席番号の誤りを自動で補正します。</p>
+                    <div class="alert alert-info no-print" id="matchGuideAlert">
+                        <i class="fas fa-circle-info"></i>
+                        <strong>「氏名を確認」が表示された行の対処方法</strong>
+                        <ul style="margin: 8px 0 0; padding-left: 1.4em;">
+                            <li>名簿と入力が一致しない場合に表示されます。入力ミスや登録名のゆれが原因です。</li>
+                            <li>回答データ（Googleフォームの回答スプレッドシート）を直接修正してから、このページで再読み込みしてください。</li>
+                            <li>修正が難しい場合は「固定する生徒を指定する」欄で該当生徒のコマを手動で固定できます。</li>
+                        </ul>
+                    </div>
+                    <div class="table-scroll">
+                        <table class="scheduler-table identity-review-table">
+                            <thead>
+                                <tr>
+                                    <th>名簿</th>
+                                    <th>保護者の入力</th>
+                                    <th>照合結果</th>
+                                </tr>
+                            </thead>
+                            <tbody id="identityReviewRows">
+                                <tr><td colspan="3">データを読み込むと表示されます。</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="input-area no-print" aria-labelledby="assignTitle" data-tutorial-step="assign" hidden>
+                    <h2 class="section-title" id="assignTitle"><span class="step-number">3</span> 固定する生徒を指定する</h2>
+                    <p class="section-description">担任の都合で空けたいコマや、兄弟姉妹を前後にしたい生徒を指定できます。右へスクロールすると、各日程枠の参加可否を○×で確認できます。</p>
+                    <p class="section-description">特別支援学級で懇談する生徒など、この学級で組まない生徒は「対象」のチェックを外してください。割当・一覧・保護者通知のすべてから外れます。</p>
+                    <div class="blocked-slot-panel" id="blockedSlotPanel" hidden>
+                        <div>
+                            <h3>担任が空けたいコマ</h3>
+                            <p>チェックしたコマには自動割当しません。会議・出張・休憩などを先に確保できます。</p>
+                            <div class="alert alert-warning blocked-slot-warning" id="blockedSlotWarning" hidden></div>
+                        </div>
+                        <div class="blocked-slot-list" id="blockedSlotList"></div>
+                    </div>
+                    <p class="scroll-hint-label no-print"><i class="fas fa-arrow-right"></i> 右にスクロールすると参加可否が確認できます</p>
+                    <div class="table-scroll table-scroll-has-more">
+                        <table class="scheduler-table assignment-table">
+                            <thead>
+                                <tr id="studentHeaderRow">
+                                    <th scope="col" title="チェックを外すと、この生徒の懇談は組みません">対象</th>
+                                    <th scope="col">番号</th>
+                                    <th scope="col">氏名</th>
+                                    <th scope="col">回答状況</th>
+                                    <th scope="col">兄弟姉妹</th>
+                                    <th scope="col">保護者からの備考</th>
+                                    <th scope="col">固定日時</th>
+                                    <th scope="col">警告</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentRows">
+                                <tr><td colspan="8">データを読み込むと表示されます。</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="action-bar">
+                        <button type="button" class="btn btn-primary btn-large" id="autoAssignBtn" disabled>
+                            <i class="fas fa-wand-magic-sparkles"></i> 自動で日程を組む
+                        </button>
+                    </div>
+                    <div class="scheduler-summary" id="assignSummary" hidden></div>
+                </section>
+
+                <section class="input-area no-print schedule-result-area" id="scheduleResultArea" aria-labelledby="scheduleResultTitle" data-tutorial-step="result" hidden>
+                    <div class="result-heading-row">
+                        <div>
+                            <h2 class="section-title" id="scheduleResultTitle"><span class="step-number">4</span> 決定した日程を確認・微調整する</h2>
+                            <p class="section-description">自動割当の結果をここですぐ確認できます。必要なコマだけ生徒を選び直すと、その内容が印刷物にも反映されます。</p>
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="rerunAssignBtn">
+                            <i class="fas fa-rotate-right"></i> もう一回自動で組み直す
+                        </button>
+                    </div>
+                    <div class="alert alert-warning manual-edit-warning" id="manualEditWarning" role="alert" hidden></div>
+                    <div id="editableScheduleArea"></div>
+                </section>
+
+                <section class="input-area no-print" aria-labelledby="printSettingsTitle" data-tutorial-step="print" hidden>
+                    <h2 class="section-title" id="printSettingsTitle"><span class="step-number">5</span> 印刷物の設定</h2>
+                    <p class="section-description">回答Excelに学校設定が含まれている場合は、読み込み時に自動で入力されます。</p>
+                    <div class="form-grid">
+                        <div class="form-group"><label for="printSchoolName">学校名</label><input type="text" id="printSchoolName" placeholder="例：〇〇市立〇〇中学校"></div>
+                        <div class="form-group">
+                        <label for="printDocDate">文書日付 <span class="required">必須</span></label>
+                        <input type="date" id="printDocDate" required>
+                        <div class="alert alert-warning" id="printDocDateWarning" hidden></div>
+                        <p class="field-hint">PDFダウンロード前に入力してください。</p>
+                    </div>
+                        <div class="form-group"><label for="printPrincipalName">校長名</label><input type="text" id="printPrincipalName" placeholder="例：〇〇 〇〇"></div>
+                        <div class="form-group"><label for="printPlace">場所</label><input type="text" id="printPlace" value="各教室"></div>
+                        <div class="form-group form-group-wide"><label for="printTitle">案内文書のタイトル</label><input type="text" id="printTitle" value="三者懇談 日時のお知らせ" maxlength="60"></div>
+                        <div class="form-group form-group-wide"><label for="printMessage">通知本文</label><textarea id="printMessage" rows="8">三者懇談の日時が下記のとおり決まりましたので、お知らせいたします。お子さまの学校での様子をお伝えするとともに、ご家庭での様子もお聞かせいただければ幸いです。ご多用のところ恐れ入りますが、ご来校くださいますようお願いいたします。</textarea></div>
+                        <div class="form-group form-group-wide"><label for="printNote">お願い・連絡事項</label><textarea id="printNote" rows="8">・当日は受付はありません。時間になりましたら、教室へ直接お越しください。
+・前のご家庭の状況により、開始時刻が多少前後することがあります。
+・ご都合が悪くなった場合は、お手数ですが担任までご連絡ください。
+・上履きをご持参ください。</textarea></div>
+                    </div>
+                    <div class="alert alert-warning print-fit-warning" id="printFitWarning" hidden></div>
+                    <div class="action-bar">
+                        <button type="button" class="btn btn-success" data-print-mode="notice"><i class="fas fa-file-pdf"></i> 保護者通知をPDFでダウンロード</button>
+                        <button type="button" class="btn btn-secondary" data-print-mode="teacher"><i class="fas fa-file-pdf"></i> 一覧をPDFでダウンロード</button>
+                    </div>
+                </section>
+
+                <section class="print-preview-area" id="printArea" aria-labelledby="printPreviewTitle" hidden>
+                    <div class="result-heading-row no-print">
+                        <div>
+                            <h2 class="section-title" id="printPreviewTitle"><span class="step-number">6</span> 印刷プレビュー</h2>
+                            <p class="result-summary">自動割当後に、通知・一覧が表示されます。</p>
+                        </div>
+                    </div>
+                    <div class="print-section print-teacher" id="teacherPreview"></div>
+                    <div class="notice-preview-controls no-print" id="noticePreviewControls" hidden>
+                        <button type="button" class="btn btn-secondary" id="toggleNoticePreviewBtn">
+                            全員分の案内文を表示
+                        </button>
+                        <span id="noticePreviewStatus"></span>
+                    </div>
+                    <div class="print-section print-notices" id="noticePreview"></div>
+                </section>
+                    </div>
+                </div>
+            </main>
+
+            <footer><!-- Footer will be injected by common-footer.js --></footer>
+        </div>
+
+        <aside class="ad-right"><!-- Ads injected by common-ads.js --></aside>
+    </div>
+
+    <script src="vendor/exceljs/exceljs.min.js"></script>
+    <script src="vendor/html2canvas/html2canvas.min.js"></script>
+    <script src="vendor/jspdf/jspdf.umd.min.js"></script>
+    <!-- 飛び先は紹介記事。実行手順は howto.html 側にあるため
+         「詳しい使い方」とは名乗らせない -->
+    <script src="js/conference-doc-format.js"></script>
+    <script src="js/conference-scheduler.js"></script>
+    
+</body>
+</html>

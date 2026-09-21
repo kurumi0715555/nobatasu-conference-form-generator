@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="希望調査フォームの作成、保護者向け案内の印刷、回答Excelからの日程作成を支援します。">
+    <link rel="stylesheet" href="common/css/common.css">
+    
+    <link rel="stylesheet" href="css/conference-form-generator.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/solid.css">
+<title>三者懇談サポート</title>
+<link rel="stylesheet" href="oss/standalone.css">
+<script defer src="oss/standalone.js"></script>
+</head>
+<body class="tool-page">
+    <div class="site-wrapper"><div class="container">
+        <header><h1><i class="fas fa-calendar-check" aria-hidden="true"></i> 三者懇談サポート</h1><p class="subtitle">希望調査から日程決定まで、先生のブラウザで進めます</p></header>
+        <main>
+            <section class="input-area" aria-labelledby="startTitle">
+                <h2 class="section-title" id="startTitle">目的から選ぶ</h2>
+                <p class="section-description">初めて使う場合は「希望調査フォームを作る」から始めてください。</p>
+                <div class="service-flow">
+                    <a class="service-flow-item" href="generator.html"><span>1</span><strong>希望調査フォームを作る</strong><small>名簿と条件からGASを生成</small></a>
+                    <a class="service-flow-item" href="invitation.html"><span>2</span><strong>保護者向け案内を作る</strong><small>QR付き文書を印刷</small></a>
+                    <a class="service-flow-item" href="scheduler.html"><span>3</span><strong>日程を決める・印刷する</strong><small>回答Excelを端末内で処理</small></a>
+                </div>
+            </section>
+            <section class="privacy-note" aria-labelledby="googleNoticeTitle">
+                <h2 id="googleNoticeTitle"><i class="fas fa-circle-info" aria-hidden="true"></i> Google Apps Scriptを使う機能があります</h2>
+                <p>希望調査フォームの作成では、生成したコードを先生自身がGoogle Apps Scriptへ貼り付けて実行します。フォーム、回答スプレッドシート、名簿などは先生のGoogle Driveへ保存されます。</p>
+                <p>初回はGoogleフォーム、Googleスプレッドシート、Google Driveに関する権限確認が表示されます。Gmail、連絡先、カレンダーなど無関係な権限が表示された場合は許可しないでください。学校のGoogle Workspaceで制限されている場合は、回避せず管理者へ確認してください。</p>
+                <p><a class="btn btn-secondary" href="howto.html">GASの実行手順を読む</a> <a class="btn btn-secondary" href="data-flow.html">データの流れを確認する</a></p>
+            </section>
+            <section class="privacy-note" aria-labelledby="localNoticeTitle">
+                <h2 id="localNoticeTitle"><i class="fas fa-shield-halved" aria-hidden="true"></i> ファイルの処理場所</h2>
+                <p>この配布版は名簿Excelや回答Excelを受け取るサーバーを持ちません。選択したファイルはブラウザ内で読み取ります。生成したGASへ含めた名簿は、先生がコードをGoogleへ貼り付けて実行した時点でGoogleへ渡ります。</p>
+            </section>
+        </main>
+        <footer><p>三者懇談サポート 独立配布版</p></footer>
+    </div></div>
+    
+</body>
+</html>

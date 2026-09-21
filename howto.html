@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="三者懇談の希望調査フォームを作る文章で確認する手順です。生成したコードをGoogleの設定ページへ貼り付けて実行するだけ。プログラミング不要で約5分で完了します。">
+    <link rel="stylesheet" href="common/css/common.css">
+    
+    <link rel="stylesheet" href="css/howto.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/solid.css">
+<title>三者懇談サポート</title>
+<link rel="stylesheet" href="oss/standalone.css">
+<script defer src="oss/standalone.js"></script>
+</head>
+<body class="howto-page">
+    <div class="site-wrapper">
+        <aside class="ad-left"><!-- Ads injected by common-ads.js --></aside>
+
+        <div class="container">
+            <header>
+                <h1><i class="fas fa-route"></i> Googleフォームの作成手順</h1>
+                <p class="subtitle">コピーしたコードをGoogleへ貼り付けてフォームを作るまで（文章版）</p>
+            </header>
+
+            <main>
+                <nav class="service-flow no-print" aria-label="三者懇談サポートの流れ">
+                    <a class="service-flow-item" href="generator.html">
+                        <span>1</span>
+                        <strong>フォームを作る</strong>
+                        <small>GAS生成</small>
+                    </a>
+                    <a class="service-flow-item is-current" href="howto.html">
+                        <span>2</span>
+                        <strong>GASを実行</strong>
+                        <small>文章で確認する手順</small>
+                    </a>
+                    <a class="service-flow-item" href="invitation.html">
+                        <span>3</span>
+                        <strong>案内を印刷</strong>
+                        <small>QRコード付き</small>
+                    </a>
+                    <a class="service-flow-item" href="scheduler.html">
+                        <span>4</span>
+                        <strong>日程を決める</strong>
+                        <small>読込・割当・印刷</small>
+                    </a>
+                </nav>
+                <a class="service-home-link no-print" href="index.html"><i class="fas fa-arrow-left"></i> サービスTOPへ戻る</a>
+                <a class="system-guide-link no-print" href="data-flow.html"><i class="fas fa-diagram-project"></i><div><strong>仕組みとデータの流れ</strong><span>入力情報の処理場所・保存先を確認する</span></div><i class="fas fa-chevron-right"></i></a>
+
+                <div class="howto-intro">
+                    <div class="intro-icon"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <h2>約5分で完了します</h2>
+                        <p>難しい設定やプログラミングは不要です。「コピー」「貼り付け」「実行」の順に進めます。</p>
+                    </div>
+                </div>
+
+                <nav class="flow-nav" aria-label="作成手順の概要">
+                    <span><strong>1</strong> コピー</span>
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    <span><strong>2</strong> 貼り付け</span>
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    <span><strong>3</strong> 実行</span>
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    <span><strong>4</strong> 権限を許可</span>
+                    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                    <span><strong>5</strong> URLを開く</span>
+                </nav>
+
+                <section class="howto-step" id="step1">
+                    <div class="step-heading">
+                        <span class="step-badge">1</span>
+                        <div>
+                            <h2>生成したGASをコピーする</h2>
+                            <p>フォーム作成ツールで条件を入力し、「GASを生成」→「GASをコピー」の順に押します。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="howto-step" id="step2">
+                    <div class="step-heading">
+                        <span class="step-badge">2</span>
+                        <div>
+                            <h2>Google Apps Scriptを開いて貼り付ける</h2>
+                            <p>下のボタンから新しいプロジェクトを開きます。画面中央のコードをすべて消し、コピーしたGASを貼り付けます。</p>
+                        </div>
+                    </div>
+
+                    <a class="btn btn-primary btn-large open-script-button" href="https://script.google.com/create" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-arrow-up-right-from-square"></i> Google Apps Scriptを開く
+                    </a>
+
+                    <!-- 実写のスクリーンショットに差し替え予定。それまでは作図の画面見本を表示する -->
+                    <figure class="screen-guide editor-guide" aria-label="Apps Scriptエディタへコードを貼り付ける画面見本">
+                        <div class="mock-app-bar">
+                            <div class="apps-script-mark"><i class="fas fa-file-code"></i></div>
+                            <strong>無題のプロジェクト</strong>
+                            <span class="saved-state"><i class="fas fa-cloud"></i> 保存済み</span>
+                        </div>
+                        <div class="mock-editor-layout">
+                            <aside>
+                                <span><i class="fas fa-code"></i> エディタ</span>
+                                <span><i class="fas fa-play-circle"></i> 実行数</span>
+                                <hr>
+                                <b>ファイル</b>
+                                <span class="active-file">コード.gs</span>
+                            </aside>
+                            <div class="mock-editor-main">
+                                <div class="mock-toolbar"><span>createConferencePreferenceForm</span><b>実行</b></div>
+                                <pre><span>1</span> /** 三者懇談フォームを作成 */
+<span>2</span> function createConferencePreferenceForm() {
+<span>3</span>   const config = {
+<span>4</span>     "title": "三者懇談 日程希望調査",
+<span>5</span>     ...
+<span>6</span>   };
+<span>7</span> }</pre>
+                                <div class="paste-callout"><i class="fas fa-arrow-left"></i> この編集欄に貼り付ける</div>
+                            </div>
+                        </div>
+                        <figcaption><i class="fas fa-image"></i> 画面見本：左の「コード.gs」を選び、中央の編集欄へ貼り付けます。</figcaption>
+                    </figure>
+
+                    <div class="shortcut-note">
+                        <div class="shortcut-row">
+                            <strong>Mac：</strong><span class="shortcut-keys"><kbd>⌘</kbd>＋<kbd>A</kbd> → <kbd>delete</kbd> → <kbd>⌘</kbd>＋<kbd>V</kbd></span>
+                        </div>
+                        <div class="shortcut-row">
+                            <strong>Windows：</strong><span class="shortcut-keys"><kbd>Ctrl</kbd>＋<kbd>A</kbd> → <kbd>Delete</kbd> → <kbd>Ctrl</kbd>＋<kbd>V</kbd></span>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info drive-storage-note">
+                        <i class="fas fa-cloud-arrow-up"></i>
+                        <div>
+                            <strong>Apps ScriptはGoogle Driveへ保存されます</strong>
+                            <p>新しいプロジェクトを作ると、使用中のGoogleアカウントのGoogle Driveへ保存されます。上部の「無題のプロジェクト」をクリックし、<strong>三者懇談フォーム作成</strong>など分かりやすい名前に変更しておくと、権限確認でも見分けやすくなります。作成されるフォームと回答スプレッドシートは、このApps Scriptと同じフォルダへ移動されます。</p>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-circle-info"></i> Apps Scriptは通常、自動保存されます。上部に「保存済み」と表示されるまで少し待ってください。
+                    </div>
+                </section>
+
+                <section class="howto-step" id="step3">
+                    <div class="step-heading">
+                        <span class="step-badge">3</span>
+                        <div>
+                            <h2>関数を選んで「実行」を押す</h2>
+                            <p>上部の関数欄が <code>createConferencePreferenceForm</code> になっていることを確認し、「実行」を押します。</p>
+                        </div>
+                    </div>
+
+                    <!-- 実写のスクリーンショットに差し替え予定。それまでは作図の画面見本を表示する -->
+                    <figure class="screen-guide run-guide" aria-label="Apps Scriptの関数選択と実行ボタンの画面見本">
+                        <div class="mock-run-toolbar">
+                            <span class="mock-tool-button"><i class="fas fa-bug"></i> デバッグ</span>
+                            <span class="mock-tool-button run-button"><i class="fas fa-play"></i> 実行</span>
+                            <div class="function-picker">createConferencePreferenceForm <i class="fas fa-caret-down"></i></div>
+                        </div>
+                        <div class="run-annotations">
+                            <span><b>①</b> この名前を確認</span>
+                            <span><b>②</b> 「実行」を押す</span>
+                        </div>
+                        <figcaption><i class="fas fa-image"></i> 画面見本：関数名を確認してから実行します。</figcaption>
+                    </figure>
+                </section>
+
+                <section class="howto-step" id="step4">
+                    <div class="step-heading">
+                        <span class="step-badge">4</span>
+                        <div>
+                            <h2>初回だけGoogleの権限を許可する</h2>
+                            <p>フォームと回答用スプレッドシートを作り、Apps Scriptと同じGoogle Driveフォルダへ保存するため、初回実行時に権限確認が表示されます。</p>
+                        </div>
+                    </div>
+
+                    <div class="safety-box">
+                        <h3><i class="fas fa-shield-halved"></i> 許可する前に、次の3点を確認してください</h3>
+                        <ul>
+                            <li>自分で新規作成したApps Scriptプロジェクトである。</li>
+                            <li>画面に表示されたプロジェクト名が、自分で付けた名前と一致している。</li>
+                            <li>貼り付けたコードが、このツールで生成したものだけである。</li>
+                        </ul>
+                        <p class="stop-warning"><i class="fas fa-hand"></i> プロジェクト名やコードに心当たりがない場合は、許可せず画面を閉じてください。</p>
+                    </div>
+
+                    <div class="permission-reason">
+                        <i class="fas fa-circle-info"></i>
+                        <div>
+                            <strong>権限の表示範囲が広く見える理由</strong>
+                            <p>Googleの権限名には「編集」や「削除」が含まれる場合がありますが、このツールで生成するコードは、新しいフォームと回答スプレッドシートの作成、回答スプレッドシート内の<code>日程条件</code>・<code>名簿（原本）</code>・<code>学校設定</code>や名簿照合・希望集計用シートの作成、Apps Scriptと同じフォルダへの移動を行います。既存ファイルを削除する処理は含みません。</p>
+                            <p><strong>Gmail、連絡先、カレンダーなど、このツールと無関係な権限が表示された場合は許可せず、貼り付けたコードを確認してください。</strong></p>
+                        </div>
+                    </div>
+
+                    <!-- 画像内のメールアドレスは your-account@example.com に差し替えてある（実アカウントは載せない） -->
+
+                    <section class="unverified-guide" aria-labelledby="unverifiedGuideTitle">
+                        <div class="unverified-heading">
+                            <i class="fas fa-triangle-exclamation"></i>
+                            <div>
+                                <h3 id="unverifiedGuideTitle">「このアプリはGoogleで確認されていません」と表示されたら</h3>
+                                <p>これは、個人で作成したApps ScriptがGoogleの審査を受けていないために表示される警告です。今回のように、自分でプロジェクトを作り、内容を確認したコードを実行するときにも表示されることがあります。上の3点を確認できていれば、以下の手順で進めます。</p>
+                            </div>
+                        </div>
+
+                        <ol class="unverified-steps">
+                            <li>
+                                <span class="mini-step">1</span>
+                                <div><strong>「詳細」を押す</strong><p>警告画面の左下付近にある「詳細」を選びます。</p></div>
+                                <span class="mock-oauth-link">詳細</span>
+                            </li>
+                            <li>
+                                <span class="mini-step">2</span>
+                                <div><strong>「三者懇談フォーム作成 に移動（安全ではありません）」を押す</strong><p>実際には、自分で付けたApps Scriptのプロジェクト名が表示されます。</p></div>
+                                <span class="mock-oauth-link unsafe-link">三者懇談フォーム作成 に移動（安全ではありません）</span>
+                            </li>
+                            <li class="permission-choice-step">
+                                <span class="mini-step">3</span>
+                                <div>
+                                    <strong>「すべて選択」にチェックして進む</strong>
+                                    <p>このツールではGoogleフォーム、Googleスプレッドシート、Google Driveの権限が必要です。通常は表示された項目をすべて選び、画面下部の「続行」を押します。Googleの画面に表示される権限名を確認してください。</p>
+                                </div>
+                                <span class="mock-allow-button">続行／許可</span>
+                            </li>
+                        </ol>
+                    </section>
+
+                    <div class="workspace-note">
+                        <i class="fas fa-school"></i>
+                        <div>
+                            <strong>学校のGoogleアカウントを使う場合</strong>
+                            <p>学校のGoogle Workspace管理者の設定により、「詳細」が表示されない、または許可できないことがあります。その場合は回避せず、管理者へ確認してください。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="howto-step" id="step5">
+                    <div class="step-heading">
+                        <span class="step-badge">5</span>
+                        <div>
+                            <h2>実行ログからフォームを開く</h2>
+                            <p>実行が完了すると、画面下部の「実行ログ」に3つのURLが表示されます。</p>
+                        </div>
+                    </div>
+
+                    <!-- 画像内のURLは XXXXXXXXXX に差し替えてある（実在のフォーム・スプレッドシートは載せない） -->
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-circle-info"></i>
+                        <div>
+                            <strong>実行ログが見えない場合</strong>
+                            <p>エディタ上部の「実行ログ」タブを押すと表示されます。タブが見当たらない場合は、メニューの「表示」→「ログ」から開いてください。</p>
+                        </div>
+                    </div>
+
+                    <div class="url-purpose-grid">
+                        <div><i class="fas fa-pen-to-square"></i><strong>編集用フォーム</strong><p>質問や説明文を直すときに教員が使います。</p></div>
+                        <div class="recommended"><i class="fas fa-paper-plane"></i><strong>保護者回答用フォーム</strong><p>このURLを保護者へ案内します。</p></div>
+                        <div><i class="fas fa-table"></i><strong>回答スプレッドシート</strong><p>回答結果を確認するときに教員が使います。</p></div>
+                    </div>
+                </section>
+
+                <section class="completion-box">
+                    <i class="fas fa-circle-check"></i>
+                    <div>
+                        <h2>これでフォーム作成は完了です</h2>
+                        <p>まず自分で保護者回答用フォームを1件テスト送信し、回答がスプレッドシートへ入ることを確認してください。</p>
+                        <a class="btn btn-primary" href="generator.html"><i class="fas fa-arrow-left"></i> フォーム作成ツールへ戻る</a>
+                    </div>
+                </section>
+
+                <div class="instructions">
+                    <h3><i class="fas fa-circle-question"></i> うまくいかないとき</h3>
+                    <ul class="troubleshooting-list">
+                        <li><strong>実行ボタンが押せない：</strong><span>コードの貼り付け後、「保存済み」になるまで待ちます。</span></li>
+                        <li><strong>権限を許可できない：</strong><span>学校のGoogle Workspace管理者がApps Scriptを制限している可能性があります。</span></li>
+                        <li><strong>実行ログが見えない：</strong><span>エディタ上部の「実行ログ」を押して表示します。</span></li>
+                    </ul>
+                </div>
+            </main>
+
+            <div class="ad-horizontal no-print">
+                <div class="ad-label">広告</div>
+                <div class="ad-horizontal-content">
+                    <i class="fas fa-rectangle-ad"></i>
+                    <p>728×90 レクタングル（大）バナー広告</p>
+                </div>
+            </div>
+
+            <footer><!-- Footer will be injected by common-footer.js --></footer>
+        </div>
+
+        <aside class="ad-right"><!-- Ads injected by common-ads.js --></aside>
+    </div>
+    <!-- このページ自身が「詳しい使い方」なので、紹介記事へ誘導しない -->
+    
+</body>
+</html>

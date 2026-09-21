@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="三者懇談の希望入力フォームURLから、QRコード付きの保護者向け案内文書をA4で作成・印刷できます。">
+    <link rel="stylesheet" href="common/css/common.css">
+    
+    <link rel="stylesheet" href="common/css/landscape-guard.css">
+    <link rel="stylesheet" href="css/conference-form-generator.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/solid.css">
+<title>三者懇談サポート</title>
+<link rel="stylesheet" href="oss/standalone.css">
+<script defer src="oss/standalone.js"></script>
+</head>
+<body class="tool-page">
+    <div class="site-wrapper">
+        <aside class="ad-left"><!-- Ads injected by common-ads.js --></aside>
+
+        <div class="container">
+            <header>
+                <h1><i class="fas fa-qrcode"></i> 希望入力案内を作る</h1>
+                <p class="subtitle">GoogleフォームのURLから、QRコード付きA4案内を作成します</p>
+            </header>
+
+            <main>
+                <nav class="service-flow no-print" aria-label="三者懇談サポートの流れ">
+                    <a class="service-flow-item" href="generator.html"><span>1</span><strong>フォームを作る</strong><small>GAS生成</small></a>
+                    <a class="service-flow-item" href="howto.html"><span>2</span><strong>GASを実行</strong><small>実行手順</small></a>
+                    <a class="service-flow-item is-current" href="invitation.html"><span>3</span><strong>案内を印刷</strong><small>QRコード付き</small></a>
+                    <a class="service-flow-item" href="scheduler.html"><span>4</span><strong>日程を決める</strong><small>読込・割当・印刷</small></a>
+                </nav>
+                <a class="service-home-link no-print" href="index.html"><i class="fas fa-arrow-left"></i> サービスTOPへ戻る</a>
+                <a class="system-guide-link no-print" href="data-flow.html"><i class="fas fa-diagram-project"></i><div><strong>仕組みとデータの流れ</strong><span>入力情報の処理場所・保存先を確認する</span></div><i class="fas fa-chevron-right"></i></a>
+
+                <section class="input-area no-print" aria-labelledby="invitationInputTitle">
+                    <h2 class="section-title" id="invitationInputTitle"><span class="step-number">1</span> 案内文書の内容</h2>
+                    <p class="section-description">「フォームを作る」ページで入力した学校名・校長名・日程・回答期限は、同じタブで開くと自動で反映されます。必要に応じて、この画面で直接変更できます。</p>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="schoolName">学校名</label>
+                            <input type="text" id="schoolName" placeholder="例：〇〇市立〇〇中学校">
+                        </div>
+                        <div class="form-group">
+                            <label for="documentDate">文書日付</label>
+                            <input type="date" id="documentDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="principalName">校長名</label>
+                            <input type="text" id="principalName" placeholder="例：〇〇 〇〇">
+                        </div>
+                        <div class="form-group">
+                            <label for="targetName">対象</label>
+                            <input type="text" id="targetName" value="保護者様">
+                        </div>
+                        <div class="form-group">
+                            <label for="conferencePeriod">三者懇談の実施日</label>
+                            <input type="text" id="conferencePeriod" placeholder="例：7月13日（月）、7月14日（火）">
+                        </div>
+                        <div class="form-group">
+                            <label for="deadlineText">回答期限</label>
+                            <input type="text" id="deadlineText" placeholder="例：6月30日（火）まで">
+                        </div>
+                        <div class="form-group form-group-wide">
+                            <label for="formUrl">保護者回答用フォームURL <span class="required">必須</span></label>
+                            <input type="url" id="formUrl" placeholder="https://docs.google.com/forms/d/e/..." inputmode="url">
+                            <p class="field-hint">GAS実行ログの「保護者回答用フォーム」のURL（/viewformで終わる）を貼り付けます。</p>
+                            <p class="field-hint url-format-warning" id="formUrlWarning" role="alert" hidden></p>
+                        </div>
+                        <div class="form-group">
+                            <label for="greetingPreset">挨拶文</label>
+                            <select id="greetingPreset">
+                                <option value="auto" selected>文書日付から自動</option>
+                                <option value="custom">自由入力</option>
+                            </select>
+                            <p class="field-hint">文書日付の月と上旬・中旬・下旬から時候の挨拶を選びます。本文を手で直すと自由入力に切り替わります。</p>
+                        </div>
+                        <div class="form-group form-group-wide">
+                            <label for="greetingText">挨拶文・本文</label>
+                            <textarea id="greetingText" rows="7"></textarea>
+                        </div>
+                        <div class="form-group form-group-wide">
+                            <label for="noteText">補足・注意事項 <span class="optional">省略可</span></label>
+                            <textarea id="noteText" rows="4" placeholder="例：入力後の変更が必要な場合は、学級担任までご連絡ください。"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <button type="button" class="btn btn-success btn-large" id="printInvitationBtn">
+                            <i class="fas fa-print"></i> 案内を印刷
+                        </button>
+                    </div>
+                    <p class="next-page-link"><a href="scheduler.html">回答が集まったら「日程を決める」へ <i class="fas fa-arrow-right"></i></a></p>
+                </section>
+
+                <section class="print-preview-area" aria-labelledby="previewTitle">
+                    <div class="result-heading-row no-print">
+                        <div>
+                            <h2 class="section-title" id="previewTitle"><span class="step-number">A4</span> 印刷プレビュー</h2>
+                            <p class="result-summary">入力した内容がそのまま印刷用文書に反映されます。</p>
+                        </div>
+                    </div>
+
+                    <article class="a4-page invitation-page" id="invitationPreview">
+                        <div class="doc-head">
+                            <div class="doc-date" data-field="documentDateText"></div>
+                            <p class="doc-recipient" data-field="targetName"></p>
+                            <div class="doc-sender">
+                                <p data-field="schoolName"></p>
+                                <p>校長　<span data-field="principalName"></span></p>
+                            </div>
+                        </div>
+                        <h2>三者懇談希望調査について（お願い）</h2>
+                        <div class="doc-body" data-field="greetingHtml"></div>
+                        <dl class="doc-details">
+                            <div><dt>実施日</dt><dd data-field="conferencePeriod"></dd></div>
+                            <div><dt>回答期限</dt><dd data-field="deadlineText"></dd></div>
+                            <div><dt>入力方法</dt><dd>下のQRコード、またはURLからフォームを開いて入力してください。</dd></div>
+                        </dl>
+                        <div class="qr-block">
+                            <div id="qrCode" class="qr-code-box" aria-label="保護者回答用フォームのQRコード"></div>
+                            <p class="qr-url" data-field="formUrl"></p>
+                        </div>
+                        <p class="doc-note" data-field="noteText"></p>
+                    </article>
+                </section>
+            </main>
+
+            <footer><!-- Footer will be injected by common-footer.js --></footer>
+        </div>
+
+        <aside class="ad-right"><!-- Ads injected by common-ads.js --></aside>
+    </div>
+    <!-- 飛び先は紹介記事。実行手順は howto.html 側にあるため
+         「詳しい使い方」とは名乗らせない -->
+    <script src="vendor/qrious/qrious.min.js"></script>
+    <script src="js/conference-doc-format.js"></script>
+    <script src="js/conference-invitation.js"></script>
+    
+</body>
+</html>

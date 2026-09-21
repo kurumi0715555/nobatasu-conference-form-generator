@@ -1,0 +1,17 @@
+{
+  "package": "qrious",
+  "version": "4.0.2",
+  "license": "GPL-3.0-or-later",
+  "qriousTagArchive": {
+    "url": "https://github.com/neocotic/qrious/archive/refs/tags/4.0.2.tar.gz",
+    "sha256": "9e7d0d123de07b6f299dfc8dfa55da401ccd445d0b2ffe2f0385bd1814899d7a"
+  },
+  "qriousCorePackage": {
+    "name": "qrious-core",
+    "version": "4.0.0",
+    "url": "https://registry.npmjs.org/qrious-core/-/qrious-core-4.0.0.tgz",
+    "sha256": "9fdef97969e0b903b821125bac99457d64621c24a3b11fcb36a52d398aff790c"
+  },
+  "selection": "31 unmodified upstream text files: qrious src, Grunt and ESLint build configuration, locked package metadata and documentation; plus qrious-core package entrypoint, src, package metadata and documentation. source/README-build.md is the local build and provenance guide, bringing the source inventory to 32 files.",
+  "fileHashes": "SOURCE-SHA256SUMS"
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="三者懇談サポートが名簿や回答をどこで処理し、どこへ保存するのかを、初心者向けの図解で説明します。">
+    <link rel="stylesheet" href="common/css/common.css">
+    
+    <link rel="stylesheet" href="css/conference-form-generator.css">
+    <link rel="stylesheet" href="css/data-flow.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/fontawesome.css">
+    <link rel="stylesheet" href="common/vendor/fontawesome/css/solid.css">
+<title>三者懇談サポート</title>
+<link rel="stylesheet" href="oss/standalone.css">
+<script defer src="oss/standalone.js"></script>
+</head>
+<body class="data-story-page">
+    <div class="site-wrapper">
+        <aside class="ad-left"></aside>
+        <div class="container data-story-container">
+            <header class="data-story-header">
+                <a class="data-story-app" href="index.html"><span>三者懇談サポート</span></a>
+                <div class="data-header-actions">
+                    <button type="button" class="motion-toggle" id="motionToggle" aria-pressed="false"><i class="fas fa-pause"></i><span>動きを止める</span></button>
+                    <a href="#details" class="header-detail-link">詳しいデータ一覧を見る</a>
+                </div>
+            </header>
+
+            <main>
+                <nav class="service-flow no-print" aria-label="三者懇談サポートの流れ">
+                    <a class="service-flow-item" href="generator.html"><span>1</span><strong>フォームを作る</strong><small>GAS生成</small></a>
+                    <a class="service-flow-item" href="howto.html"><span>2</span><strong>GASを実行</strong><small>実行手順</small></a>
+                    <a class="service-flow-item" href="invitation.html"><span>3</span><strong>案内を印刷</strong><small>QRコード付き</small></a>
+                    <a class="service-flow-item" href="scheduler.html"><span>4</span><strong>日程を決める</strong><small>読込・割当・印刷</small></a>
+                </nav>
+
+                <section class="data-hero" aria-labelledby="dataHeroTitle">
+                    <div class="data-hero-copy">
+                        <p class="hero-eyebrow"><i class="fas fa-shield-halved"></i> 安心して使うためのガイド</p>
+                        <h1 id="dataHeroTitle"><span class="hero-title-line">入力したデータは、</span><em class="hero-title-line">どこへ行くのか。</em></h1>
+                        <p class="hero-lead"><span>名簿や回答を扱うツールだからこそ、仕組みを曖昧にしません。</span><span>何が、いつ、どこで処理されるかを、順番に説明します。</span></p>
+                        <div class="hero-actions">
+                            <a href="#three-points" class="btn btn-primary btn-large">まず結論を見る</a>
+                            <a href="#journey" class="btn btn-secondary btn-large">流れを順に見る</a>
+                        </div>
+                        <ul class="hero-trust-list">
+                            <li><i class="fas fa-check"></i> 名簿・回答ファイルをNOBATASUへ送信しない</li>
+                            <li><i class="fas fa-check"></i> 日程計算は先生のブラウザ内で実行</li>
+                            <li><i class="fas fa-check"></i> Google上のデータは先生のアカウントで管理</li>
+                        </ul>
+                    </div>
+
+                    <div class="hero-visual" aria-label="ブラウザを中心とした安全な処理のイメージ">
+                        <div class="visual-orbit orbit-one"></div>
+                        <div class="visual-orbit orbit-two"></div>
+                        <div class="visual-core">
+                            <span class="core-pulse"></span>
+                            <i class="fas fa-laptop"></i>
+                            <strong>先生のブラウザ</strong>
+                            <small>読取・照合・計算</small>
+                        </div>
+                        <div class="orbit-item item-file"><i class="fas fa-file-excel"></i><span>Excel</span></div>
+                        <div class="orbit-item item-drive"><i class="fab fa-google-drive"></i><span>Drive</span></div>
+                        <div class="orbit-item item-print"><i class="fas fa-print"></i><span>印刷</span></div>
+                        <div class="no-upload-badge"><i class="fas fa-ban"></i><span>NOBATASUへ<br>ファイル送信なし</span></div>
+                    </div>
+                </section>
+
+                <section class="quick-trust" id="three-points" aria-labelledby="quickTrustTitle">
+                    <div class="section-kicker">3つの結論</div>
+                    <h2 id="quickTrustTitle">先に、結論だけお伝えします</h2>
+                    <div class="quick-trust-grid">
+                        <article data-reveal>
+                            <span class="trust-icon is-browser"><i class="fas fa-laptop-code"></i></span>
+                            <p class="trust-number">01</p>
+                            <h3>読取と計算はブラウザ内</h3>
+                            <p>選択した名簿・回答Excelは、先生が開いているブラウザの中で解析します。</p>
+                        </article>
+                        <article data-reveal>
+                            <span class="trust-icon is-server"><i class="fas fa-server"></i></span>
+                            <p class="trust-number">02</p>
+                            <h3>NOBATASUに名簿を保存しない</h3>
+                            <p>名簿や回答を受け取る送信処理、会員データベース、独自ログインはありません。</p>
+                        </article>
+                        <article data-reveal>
+                            <span class="trust-icon is-google"><i class="fab fa-google-drive"></i></span>
+                            <p class="trust-number">03</p>
+                            <h3>Googleデータは先生が管理</h3>
+                            <p>フォームと回答シートは、GASを実行した先生のGoogle Driveへ作成されます。</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="data-journey" id="journey" aria-labelledby="journeyTitle">
+                    <div class="journey-heading" data-reveal>
+                        <div>
+                            <p class="section-kicker">データの通り道</p>
+                            <h2 id="journeyTitle">データは、この順番で受け渡されます</h2>
+                        </div>
+                        <p>色は場所を表します。青緑は先生のブラウザ、紫はGoogle、緑は先生の端末です。</p>
+                    </div>
+
+                    <div class="journey-track" aria-hidden="true"><span></span></div>
+                    <ol class="journey-list">
+                        <li class="journey-card place-browser" data-journey-step>
+                            <div class="journey-index">1</div>
+                            <div class="journey-icon"><i class="fas fa-school"></i></div>
+                            <div class="journey-copy"><span class="place-label">先生のブラウザ</span><h3>学校情報と全校名簿を読み込む</h3><p>名簿Excelから学年・クラス・番号・氏名を読み、対象学級を自動で作ります。</p><small>この時点ではGoogleへもNOBATASUへも送信しません。</small></div>
+                        </li>
+                        <li class="journey-card place-browser" data-journey-step>
+                            <div class="journey-index">2</div>
+                            <div class="journey-icon"><i class="fas fa-code"></i></div>
+                            <div class="journey-copy"><span class="place-label">先生のブラウザ</span><h3>フォームを作るGASを生成する</h3><p>学校情報、全校名簿、日程条件を含むコードを作り、先生がコピーします。</p><small>重要：コピーしたGASには全校名簿が文字として含まれます。</small></div>
+                        </li>
+                        <li class="journey-card place-google" data-journey-step>
+                            <div class="journey-index">3</div>
+                            <div class="journey-icon"><i class="fab fa-google"></i></div>
+                            <div class="journey-copy"><span class="place-label">Google Apps Script</span><h3>先生自身がコードを実行する</h3><p>先生のGoogleアカウント権限で、フォームと回答スプレッドシートを作成します。</p><small>NOBATASUがGoogleアカウントへログインすることはありません。</small></div>
+                        </li>
+                        <li class="journey-card place-google" data-journey-step>
+                            <div class="journey-index">4</div>
+                            <div class="journey-icon"><i class="fab fa-google-drive"></i></div>
+                            <div class="journey-copy"><span class="place-label">先生のGoogle Drive</span><h3>フォーム・条件・名簿をまとめて保存する</h3><p>回答シート、日程条件、名簿、学校設定が1つのスプレッドシートにまとまります。</p><small>共有範囲と保管は、学校のGoogleアカウント側で管理します。</small></div>
+                        </li>
+                        <li class="journey-card place-google" data-journey-step>
+                            <div class="journey-index">5</div>
+                            <div class="journey-icon"><i class="fas fa-people-roof"></i></div>
+                            <div class="journey-copy"><span class="place-label">Googleフォーム</span><h3>保護者が希望日時を回答する</h3><p>保護者が入力した内容は、Googleフォームから回答スプレッドシートへ保存されます。</p><small>兄弟姉妹は同じ回答行にまとめられます。</small></div>
+                        </li>
+                        <li class="journey-card place-device" data-journey-step>
+                            <div class="journey-index">6</div>
+                            <div class="journey-icon"><i class="fas fa-file-arrow-down"></i></div>
+                            <div class="journey-copy"><span class="place-label">先生の端末</span><h3>回答をExcel形式でダウンロードする</h3><p>回答・日程条件・名簿・学校設定が入った`.xlsx`を先生の端末へ保存します。</p><small>このExcelには個人情報が含まれるため、学校のルールで管理します。</small></div>
+                        </li>
+                        <li class="journey-card place-browser" data-journey-step>
+                            <div class="journey-index">7</div>
+                            <div class="journey-icon"><i class="fas fa-calendar-check"></i></div>
+                            <div class="journey-copy"><span class="place-label">先生のブラウザ</span><h3>名簿照合と日程の自動割当を行う</h3><p>番号間違い、氏名違い、重複回答を確認し、希望枠内でクラスの日程を組みます。</p><small>Excelを選んでも、ファイルはNOBATASUへアップロードされません。</small></div>
+                        </li>
+                        <li class="journey-card place-device" data-journey-step>
+                            <div class="journey-index">8</div>
+                            <div class="journey-icon"><i class="fas fa-print"></i></div>
+                            <div class="journey-copy"><span class="place-label">先生の端末・プリンター</span><h3>通知と一覧を印刷する</h3><p>保護者通知、担任用一覧、掲示用一覧を生成し、そのまま印刷します。</p><small>割当結果は再読み込みで消えるため、完成後に印刷またはPDF保存します。</small></div>
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="feature-story" aria-labelledby="featureStoryTitle">
+                    <div class="section-kicker">4つの機能</div>
+                    <h2 id="featureStoryTitle">誰が、いつ、何のために使うのか</h2>
+                    <div class="feature-story-grid">
+                        <article data-reveal><div class="feature-top"><span>01</span><i class="fas fa-list-check"></i></div><h3>希望調査フォームを作る</h3><dl><div><dt>主な利用者</dt><dd>教務主任・担当者</dd></div><div><dt>利用時期</dt><dd>希望調査を始める前</dd></div><div><dt>処理場所</dt><dd>ブラウザ → Google</dd></div></dl><a href="generator.html">フォーム作成へ <i class="fas fa-arrow-right"></i></a></article>
+                        <article data-reveal><div class="feature-top"><span>02</span><i class="fas fa-qrcode"></i></div><h3>QRコード付き案内を作る</h3><dl><div><dt>主な利用者</dt><dd>教務主任・担当者</dd></div><div><dt>利用時期</dt><dd>フォーム完成後</dd></div><div><dt>処理場所</dt><dd>先生のブラウザ</dd></div></dl><a href="invitation.html">案内作成へ <i class="fas fa-arrow-right"></i></a></article>
+                        <article data-reveal><div class="feature-top"><span>03</span><i class="fas fa-user-check"></i></div><h3>名簿と回答を照合する</h3><dl><div><dt>主な利用者</dt><dd>各学級担任</dd></div><div><dt>利用時期</dt><dd>回答締切後</dd></div><div><dt>処理場所</dt><dd>先生のブラウザ</dd></div></dl><a href="scheduler.html">回答照合へ <i class="fas fa-arrow-right"></i></a></article>
+                        <article data-reveal><div class="feature-top"><span>04</span><i class="fas fa-table-cells"></i></div><h3>日程を組み、印刷する</h3><dl><div><dt>主な利用者</dt><dd>各学級担任</dd></div><div><dt>利用時期</dt><dd>照合確認後</dd></div><div><dt>処理場所</dt><dd>ブラウザ・プリンター</dd></div></dl><a href="scheduler.html">日程決定へ <i class="fas fa-arrow-right"></i></a></article>
+                    </div>
+                </section>
+
+                <section class="custody-section" aria-labelledby="custodyTitle">
+                    <div class="custody-heading" data-reveal><p class="section-kicker">保存先の整理</p><h2 id="custodyTitle">保存されるものと、保存されないもの</h2><p>「どこにも保存されない」わけではありません。必要なものが、必要な場所にだけ残ります。</p></div>
+                    <div class="custody-grid">
+                        <article class="custody-card is-saved" data-reveal><span class="custody-label"><i class="fas fa-cloud-arrow-up"></i> Google Driveに保存</span><h3>継続して必要なデータ</h3><ul><li>Googleフォーム</li><li>保護者の回答</li><li>日程条件</li><li>全校名簿シート</li><li>学校設定</li></ul><p>先生のGoogleアカウントで管理します。</p></article>
+                        <article class="custody-card is-local" data-reveal><span class="custody-label"><i class="fas fa-laptop"></i> ブラウザ内だけ</span><h3>処理中だけ必要なデータ</h3><ul><li>読み込んだExcelの解析内容</li><li>名簿照合結果</li><li>日程の自動割当結果</li><li>印刷プレビュー</li></ul><p>ページを再読み込みすると消えます。</p></article>
+                        <article class="custody-card is-never" data-reveal><span class="custody-label"><i class="fas fa-ban"></i> NOBATASUに保存しない</span><h3>サイト側で保持しないデータ</h3><ul><li>全校名簿ファイル</li><li>回答Excelファイル</li><li>保護者回答</li><li>作成した日程</li></ul><p>受信用APIや個人情報DBを使用しません。</p></article>
+                    </div>
+                </section>
+
+                <section class="safety-section" aria-labelledby="safetyTitle">
+                    <div class="safety-visual" data-reveal>
+                        <div class="shield-ring ring-a"></div><div class="shield-ring ring-b"></div>
+                        <i class="fas fa-shield-halved"></i>
+                        <strong>先生が管理できる範囲で完結</strong>
+                    </div>
+                    <div class="safety-copy">
+                        <p class="section-kicker">仕組みでつくる安心</p>
+                        <h2 id="safetyTitle">安心は、注意書きではなく仕組みでつくる</h2>
+                        <div class="safety-points">
+                            <article data-reveal><i class="fas fa-upload"></i><div><h3>ファイル送信処理を持たない</h3><p>名簿と回答Excelは、JavaScriptでブラウザ内から直接読み取ります。</p></div></article>
+                            <article data-reveal><i class="fas fa-key"></i><div><h3>Googleへのアクセスは先生自身が実行</h3><p>先生が自分でApps Scriptを作り、内容を確認して権限を許可します。</p></div></article>
+                            <article data-reveal><i class="fas fa-eye"></i><div><h3>照合結果を目で確認できる</h3><p>番号補正や氏名不一致を隠さず表示し、日程作成前に確認できます。</p></div></article>
+                            <article data-reveal><i class="fas fa-user-lock"></i><div><h3>アカウント登録を求めない</h3><p>NOBATASU用のログイン、名簿登録、クラウド保存は必要ありません。</p></div></article>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="detail-section" id="details" aria-labelledby="detailsTitle">
+                    <div class="section-kicker">くわしい資料</div>
+                    <h2 id="detailsTitle">データごとの詳しい扱い</h2>
+                    <p>校内で導入を相談するとき、管理職や情報担当の先生にはこの表を見せてください。</p>
+                    <div class="table-scroll">
+                        <table class="data-handling-table">
+                            <thead><tr><th>データ</th><th>入力・発生場所</th><th>処理場所</th><th>保存先</th><th>注意点</th></tr></thead>
+                            <tbody>
+                                <tr><th>学校名・校長名</th><td data-label="入力・発生場所">フォーム作成ページ</td><td data-label="処理場所">ブラウザ、GAS</td><td data-label="保存先">学校設定シート、同じタブ内の一時保存領域（タブを閉じると消去）</td><td data-label="注意点">案内ページへの自動反映に使用</td></tr>
+                                <tr><th>全校名簿</th><td data-label="入力・発生場所">名簿Excel</td><td data-label="処理場所">ブラウザ、GAS</td><td data-label="保存先">Google Drive内の名簿シート</td><td data-label="注意点">生成GASにも文字データとして含まれる</td></tr>
+                                <tr><th>日程条件</th><td data-label="入力・発生場所">フォーム作成ページ</td><td data-label="処理場所">ブラウザ、GAS</td><td data-label="保存先">Google Drive内の日程条件シート</td><td data-label="注意点">日付、時間枠、回答方式、通知文を含む</td></tr>
+                                <tr><th>フォームURL</th><td data-label="入力・発生場所">GAS実行結果</td><td data-label="処理場所">ブラウザ</td><td data-label="保存先">永続保存しない</td><td data-label="注意点">QRコードはブラウザ内で生成</td></tr>
+                                <tr><th>保護者回答</th><td data-label="入力・発生場所">Googleフォーム</td><td data-label="処理場所">Google</td><td data-label="保存先">Google Drive内の回答シート</td><td data-label="注意点">同じ生徒は新しい回答を採用</td></tr>
+                                <tr><th>回答Excel</th><td data-label="入力・発生場所">Googleスプレッドシート</td><td data-label="処理場所">ブラウザ</td><td data-label="保存先">先生の端末</td><td data-label="注意点">選択してもNOBATASUへ送信しない</td></tr>
+                                <tr><th>日程割当結果</th><td data-label="入力・発生場所">日程決定ページ</td><td data-label="処理場所">ブラウザ</td><td data-label="保存先">永続保存しない</td><td data-label="注意点">完成後に印刷またはPDF保存する</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="beginner-faq" aria-labelledby="faqTitle">
+                    <div class="section-kicker">FAQ</div>
+                    <h2 id="faqTitle">初めて使う前によくある質問</h2>
+                    <details><summary>名簿をアップロードすると、インターネットへ送られますか？</summary><p>いいえ。選択した名簿Excelは、先生のブラウザ内で読み取ります。ただし、生成したGASには名簿が含まれ、そのコードを先生自身がGoogle Apps Scriptへ貼り付けます。</p></details>
+                    <details><summary>NOBATASUの管理者は保護者の回答を見られますか？</summary><p>見られません。回答は先生のGoogle Driveにあるスプレッドシートへ保存され、NOBATASUへ送信されません。</p></details>
+                    <details><summary>ブラウザを閉じても、作った日程は残りますか？</summary><p>残りません。日程割当はブラウザ内だけで処理します。完成したら印刷するか、印刷画面からPDFとして保存してください。</p></details>
+                    <details><summary>学校のGoogle Workspaceで制限されることはありますか？</summary><p>あります。学校の管理者がApps ScriptやGoogleフォームの作成を制限している場合は実行できません。手順ページで確認方法を案内しています。</p></details>
+                </section>
+
+                <section class="data-story-cta" data-reveal>
+                    <div><p class="section-kicker">準備ができたら</p><h2>仕組みを確認したら、初期設定から始められます</h2><p>最初に学校情報と全校名簿を設定し、希望調査フォームを作成します。</p></div>
+                    <a href="generator.html" class="btn btn-primary btn-large">フォーム作成を始める <i class="fas fa-arrow-right"></i></a>
+                </section>
+            </main>
+            <footer></footer>
+        </div>
+        <aside class="ad-right"></aside>
+    </div>
+    <!-- 安全性の説明ページ。使い方の導線としては文脈が合わないため出さない -->
+    <script src="js/data-flow.js"></script>
+    
+</body>
+</html>
